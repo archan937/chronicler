@@ -8,7 +8,7 @@ require "chronicler/repository"
 class Chronicler
 
   CONFIG = ".chronicler"
-  DEFAULT_PATH = "~/Chronicler"
+  DEFAULT_PATH = "~/Chronicles"
 
   def self.setup(path)
     path = DEFAULT_PATH if path.to_s.strip.empty?
