@@ -2,9 +2,20 @@
 
 Version control your (development) databases using Git
 
+## Installation
+
+Run the following command to install `Chronicler`:
+
+    $ gem install "chronicler"
+
+## Usage
+
+Chronicler is a command-line-tool so for starters, you can print help instructions:
+
+    $ crn --help
+
 ## TODO
 
-* Improve README.md
 * Watch and unwatch switching branches
 * Added memoization within CLI and Repository
 
