@@ -92,7 +92,7 @@ class Chronicler
       repository.run(command, :system)
     end
 
-    desc "tree", "List branches"
+    desc "tree", "Print branch graph tree"
     def tree
       puts "On repository #{repository.name}"
       repository.git("log --graph --oneline --decorate --date=relative --all", :system)
