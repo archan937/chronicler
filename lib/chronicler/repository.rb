@@ -52,7 +52,6 @@ class Chronicler
     end
 
     def load
-      require "pry"
       databases.each do |database|
         run "gunzip < #{database}.sql.gz | mysql -u root #{database}"
       end
@@ -61,6 +60,10 @@ class Chronicler
     def checkout(branch)
       git "checkout #{branch}"
       load
+    end
+
+    def reset(commit)
+      git "reset --hard #{commit}"
     end
 
     def git(command, output = :silence)

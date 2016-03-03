@@ -26,7 +26,6 @@ class Chronicler
 
       name ||= begin
         no_repository_available! if repositories.empty?
-
         postfix = " (on #{current})" if repositories.include?(current)
         repositories[Ask.list("Which repository do you want to use?#{postfix}", repositories)]
       end
@@ -175,6 +174,13 @@ class Chronicler
 
       repository.checkout identifier
       puts "Successfully loaded database#{"s" unless repository.databases.size == 1} of '#{identifier}'"
+    end
+
+    desc "reset [COMMIT]", "Reset current branch to specified commit"
+    def reset(commit)
+      if Ask.confirm("Are you sure you want to reset #{repository.name}:#{repository.branch} to #{commit.yellow}?")
+        repository.reset(commit)
+      end
     end
 
     desc "destroy", "Remove Chronicler entirely"
