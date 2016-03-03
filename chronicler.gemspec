@@ -1,4 +1,5 @@
 # -*- encoding: utf-8 -*-
+require File.expand_path("../lib/chronicler/version", __FILE__)
 
 Gem::Specification.new do |gem|
   gem.authors       = ["Paul Engel"]
@@ -12,7 +13,8 @@ Gem::Specification.new do |gem|
   gem.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
   gem.name          = "chronicler"
   gem.require_paths = ["lib"]
-  gem.version       = "0.1.0"
+  gem.version       = Chronicler::VERSION
+  gem.licenses      = ["MIT"]
 
   gem.add_dependency "thor"
   gem.add_dependency "toml-rb"

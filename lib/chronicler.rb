@@ -4,6 +4,7 @@ require "chronicler/core_ext"
 require "chronicler/config"
 require "chronicler/git"
 require "chronicler/repository"
+require "chronicler/version"
 
 class Chronicler
 
