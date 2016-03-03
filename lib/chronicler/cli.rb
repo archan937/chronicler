@@ -127,14 +127,22 @@ class Chronicler
     desc "commit", "Commit current state of databases"
     method_options [:message, "-m"] => :string, [:tag, "-t"] => :string
     def commit
-      if repository.new?
-        select
-      elsif !repository.dirty?
+      unless repository.dirty?
         puts "Nothing to commit."
-        return
+        exit!
       end
+
+      if (tag = options[:tag]) && !repository.git("rev-parse #{tag}", :verbose).empty?
+        unless Ask.confirm("Tag '#{tag}' already exists. Do you want to move the tag?")
+          puts "fatal: Commit aborted."
+          exit!
+        end
+      end
+
+      select if repository.new?
+
       message = options[:message] || "Updated databases"
-      repository.commit message, options[:tag]
+      repository.commit message, tag
     end
 
     desc "reset", "Reset database(s) to last commit"

@@ -48,7 +48,7 @@ class Chronicler
       config[:"repository.checksums"] = checksums
       git "add ."
       git "commit -m #{message.inspect}"
-      git "tag #{tag}" if tag
+      git "tag -f #{tag}" if tag
     end
 
     def reset
