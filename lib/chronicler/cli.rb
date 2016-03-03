@@ -254,7 +254,7 @@ class Chronicler
     end
 
     def method_missing(method, *args)
-      raise Error, "Unrecognized command \"#{method}\". Please consult `ds help`."
+      raise Error, "Unrecognized command \"#{method}\". Please consult `crn help`."
     end
 
   end
