@@ -77,13 +77,13 @@ class Chronicler
       else
         puts "Changes for commit:"
         puts
-        (changes[:added] || []).each do |(table, checksum)|
+        changes[:added].each do |(table, checksum)|
           puts "       added:  #{table}"
         end
-        (changes[:modified] || []).each do |(table, checksum)|
+        changes[:modified].each do |(table, checksum)|
           puts "    modified:  #{table} (#{checksum})"
         end
-        (changes[:deleted] || []).each do |(table, checksum)|
+        changes[:deleted].each do |(table, checksum)|
           puts "     deleted:  #{table}"
         end
         puts

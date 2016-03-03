@@ -53,7 +53,9 @@ class Chronicler
 
     def load
       databases.each do |database|
-        run "gunzip < #{database}.sql.gz | mysql -u root #{database}"
+        Dir[File.join(path, database, "*.sql.gz")].each do |gzip|
+          run "gunzip < #{gzip} | mysql -u root #{database}"
+        end
       end
     end
 
@@ -101,7 +103,9 @@ class Chronicler
       modified = current.select{|table, checksum| stored.keys.include?(table) && (stored[table] != checksum)}
       deleted = stored.reject{|table, checksum| current.keys.include?(table)}
 
-      {}.tap do |changes|
+      Hash.new do |hash, key|
+        hash[key] = {}
+      end.tap do |changes|
         changes[:added] = added if added.any?
         changes[:modified] = modified if modified.any?
         changes[:deleted] = deleted if deleted.any?
@@ -127,16 +131,21 @@ class Chronicler
     end
 
     def dump
-      Dir[File.join(path, "*.sql.gz")].each do |file|
-        unless databases.include?(File.basename(file, ".sql.gz"))
-          File.delete(file)
-        end
+      changed = changes
+
+      changed[:deleted].each do |table, checksum|
+        File.delete File.join(path, "#{table.gsub("-", File::SEPARATOR)}.sql.gz")
+      end
+      changed[:added].merge(changed[:modified]).each do |table, checksum|
+        database, table = table.split("-")
+        FileUtils.mkdir_p File.join(path, database)
+        run "mysqldump -u root #{database} #{table} | gzip -c | cat > #{File.join(database, table)}.sql.gz"
       end
 
-      changed = changes.values.flatten
-      changed_databases = changed.collect{|h| h.keys.collect{|t| t.gsub(/-.*/, "")}}.flatten.uniq
-      changed_databases.each do |database|
-        run "mysqldump -u root #{database} | gzip -c | cat > #{database}.sql.gz"
+      Dir[File.join(path, "*")].each do |file|
+        if File.directory?(file) && Dir["#{File.join(file, "*.sql.gz")}"].empty?
+          FileUtils.rm_rf file
+        end
       end
     end
 
