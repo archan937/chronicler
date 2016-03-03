@@ -13,6 +13,22 @@ Run the following command to install `Chronicler`:
 Chronicler is a command-line-tool so for starters, you can print help instructions:
 
     $ crn --help
+    Commands:
+      crn branch                 # List branches
+      crn checkout [IDENTIFIER]  # Switch and load the specified branch or commit or tag (IDENTIFIER is optional)
+      crn commit                 # Commit current state of databases
+      crn destroy                # Remove Chronicler entirely
+      crn help [COMMAND]         # Describe available commands or one specific command
+      crn init [NAME]            # Create a new repository (NAME defaults to current Git repository or current user)
+      crn list                   # List repositories
+      crn log [INTERFACE]        # Show commit logs (INTERFACE is optional)
+      crn new [BRANCH]           # Create a new branch (BRANCH defaults to current Git branch)
+      crn open                   # Open current repository
+      crn reset                  # Reset database(s) to last commit
+      crn select                 # Select which databases to store
+      crn status                 # Show current status
+      crn tree                   # Print branch graph tree
+      crn use [NAME]             # Use existing repository (NAME is optional)
 
 ## TODO
 
