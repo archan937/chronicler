@@ -107,7 +107,7 @@ class Chronicler
       end
     end
 
-    desc "select", "Select of which databases to store"
+    desc "select", "Select which databases to store"
     def select
       repository_databases = repository.databases
       databases = []
@@ -144,9 +144,9 @@ class Chronicler
       end
     end
 
-    desc "checkout [BRANCH_OR_COMMIT]", "Switch and load the specified branch or commit (BRANCH_OR_COMMIT is optional)"
-    def checkout(branch_or_commit = nil)
-      branch_or_commit ||= begin
+    desc "checkout [IDENTIFIER]", "Switch and load the specified branch or commit or tag (IDENTIFIER is optional)"
+    def checkout(identifier = nil)
+      identifier ||= begin
         branches = repository.branches - [repository.branch]
         branches[Ask.list("Which branch do you want to checkout? (on #{repository.branch})", branches)]
       end
@@ -155,8 +155,8 @@ class Chronicler
         commit
       end
 
-      puts "Loading database(s) of #{branch_or_commit}"
-      repository.checkout branch_or_commit
+      repository.checkout identifier
+      puts "Successfully loaded database#{"s" unless repository.databases.size == 1} of '#{identifier}'"
     end
 
     desc "destroy", "Remove Chronicler entirely"
