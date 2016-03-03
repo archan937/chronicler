@@ -1,4 +1,4 @@
-# Chronicler
+# Chronicler [![Gem](https://img.shields.io/gem/v/chronicler.svg)](https://rubygems.org/gems/chronicler) [![Gem](https://img.shields.io/gem/dt/chronicler.svg)](https://rubygems.org/gems/chronicler)
 
 Version control your (development) databases using Git
 
@@ -12,19 +12,20 @@ Run the following command to install `Chronicler`:
 
 Chronicler is a command-line-tool so for starters, you can print help instructions:
 
-    $ crn --help
+    $ crn help
     Commands:
       crn branch                 # List branches
       crn checkout [IDENTIFIER]  # Switch and load the specified branch or commit or tag (IDENTIFIER is optional)
-      crn commit                 # Commit current state of databases
+      crn commit                 # Commit current state of selected databases
       crn destroy                # Remove Chronicler entirely
       crn help [COMMAND]         # Describe available commands or one specific command
       crn init [NAME]            # Create a new repository (NAME defaults to current Git repository or current user)
       crn list                   # List repositories
+      crn load                   # Load database(s) of current commit
       crn log [INTERFACE]        # Show commit logs (INTERFACE is optional)
       crn new [BRANCH]           # Create a new branch (BRANCH defaults to current Git branch)
       crn open                   # Open current repository
-      crn reset                  # Reset database(s) to last commit
+      crn reset [COMMIT]         # Reset current branch to specified commit
       crn select                 # Select which databases to store
       crn status                 # Show current status
       crn tree                   # Print branch graph tree
