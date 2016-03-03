@@ -16,17 +16,27 @@ class Chronicler
 
     desc "use [NAME]", "Use existing repository (NAME is optional)"
     def use(name = nil)
-      name ||= begin
-        current = current_name
-        repositories = Chronicler.repositories - [current]
+      current = current_name
+      repositories = Chronicler.repositories - [current]
 
+      if name == current
+        puts "Already using Chronicler repository '#{name}'."
+        exit!
+      end
+
+      name ||= begin
         no_repository_available! if repositories.empty?
 
         postfix = " (on #{current})" if repositories.include?(current)
         repositories[Ask.list("Which repository do you want to use?#{postfix}", repositories)]
       end
 
-      config_use name
+      unless repositories.include?(name)
+        puts "fatal: Chronicler repository '#{name}' does not exist."
+        exit!
+      end
+
+      config_use(name)
     end
 
     desc "open", "Open current repository"
