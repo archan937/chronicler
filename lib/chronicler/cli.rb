@@ -145,10 +145,10 @@ class Chronicler
       repository.commit message, tag
     end
 
-    desc "reset", "Reset database(s) to last commit"
-    def reset
-      if repository && Ask.confirm("Are you sure you want to reset to the last commit? (Changes will be lost)")
-        repository.reset
+    desc "load", "Load database(s) of current commit"
+    def load
+      if Ask.confirm("Are you sure you want to load databases from the #{repository.name.blue}:#{Git.head(repository.path)[0..7].yellow} commit? (Changes will be LOST)")
+        repository.load
       end
     end
 

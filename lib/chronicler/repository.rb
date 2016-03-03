@@ -51,8 +51,11 @@ class Chronicler
       git "tag -f #{tag}" if tag
     end
 
-    def reset
-      load
+    def load
+      require "pry"
+      databases.each do |database|
+        run "gunzip < #{database}.sql.gz | mysql -u root #{database}"
+      end
     end
 
     def checkout(branch)
@@ -130,13 +133,7 @@ class Chronicler
       changed = changes.values.flatten
       changed_databases = changed.collect{|h| h.keys.collect{|t| t.gsub(/-.*/, "")}}.flatten.uniq
       changed_databases.each do |database|
-        run "mysqldump -u root #{database} | gzip -c | cat > #{database}.sql.gz", true
-      end
-    end
-
-    def load
-      databases.each do |database|
-        run "gunzip < #{database}.sql.gz | mysql -u root #{database}", true
+        run "mysqldump -u root #{database} | gzip -c | cat > #{database}.sql.gz"
       end
     end
 
