@@ -126,14 +126,14 @@ class Chronicler
       end
       selected = options.collect{|database| repository_databases.include?(database)}
 
-      Ask.checkbox("Which databases would you like to store?", options, default: selected).each_with_index do |checked, index|
+      Ask.checkbox("Which database(s) would you like to store?", options, default: selected).each_with_index do |checked, index|
         databases << options[index] if checked
       end
 
       repository.select databases
     end
 
-    desc "commit", "Commit current state of databases"
+    desc "commit", "Commit current state of selected databases"
     method_options [:message, "-m"] => :string, [:tag, "-t"] => :string
     def commit
       if repository.new?
