@@ -1,5 +1,9 @@
 ## Chronicler CHANGELOG
 
+### Version 0.1.2 (March 14, 2016)
+
+* Fixed creating gzipped database dumps
+
 ### Version 0.1.1 (March 4, 2016)
 
 * Being able to move a tag during commit
