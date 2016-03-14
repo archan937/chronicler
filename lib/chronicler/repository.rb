@@ -139,7 +139,7 @@ class Chronicler
       changed[:added].merge(changed[:modified]).each do |table, checksum|
         database, table = table.split("-")
         FileUtils.mkdir_p File.join(path, database)
-        run "mysqldump -u root #{database} #{table} | gzip -c | cat > #{File.join(database, table)}.sql.gz"
+        run "mysqldump -u root #{database} #{table} | gzip -c | cat > #{File.join(database, table)}.sql.gz", true
       end
 
       Dir[File.join(path, "*")].each do |file|
