@@ -1,5 +1,11 @@
 ## Chronicler CHANGELOG
 
+### Version 0.1.3 (May 1, 2016)
+
+* Added `switch`
+* Corrected printing current repository before using another repository
+* Added `crn -v` (also `crn --version`)
+
 ### Version 0.1.2 (March 14, 2016)
 
 * Fixed creating gzipped database dumps
