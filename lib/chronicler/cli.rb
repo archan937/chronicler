@@ -38,6 +38,12 @@ class Chronicler
       config_use(name)
     end
 
+    desc "switch [NAME]", "Use and load existing repository (NAME is optional)"
+    def switch(name = nil)
+      use(name)
+      load
+    end
+
     desc "open", "Open current repository"
     def open
       repository.run "open ."
