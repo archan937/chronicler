@@ -14,6 +14,7 @@ Chronicler is a command-line-tool so for starters, you can print help instructio
 
     $ crn help
     Commands:
+      crn -v, [--version]        # Show Chronicler version number
       crn branch                 # List branches
       crn checkout [IDENTIFIER]  # Switch and load the specified branch or commit or tag (IDENTIFIER is optional)
       crn commit                 # Commit current state of selected databases
@@ -28,6 +29,7 @@ Chronicler is a command-line-tool so for starters, you can print help instructio
       crn reset [COMMIT]         # Reset current branch to specified commit
       crn select                 # Select which databases to store
       crn status                 # Show current status
+      crn switch [NAME]          # Use and load existing repository (NAME is optional)
       crn tree                   # Print branch graph tree
       crn use [NAME]             # Use existing repository (NAME is optional)
 
