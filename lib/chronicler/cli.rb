@@ -202,6 +202,12 @@ class Chronicler
       end
     end
 
+    desc "-v, [--version]", "Show Chronicler version number"
+    map %w(-v --version) => :__print_version
+    def __print_version
+      puts "Chronicler #{Chronicler::VERSION}"
+    end
+
   private
 
     def ensure_store
