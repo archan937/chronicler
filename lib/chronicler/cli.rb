@@ -26,7 +26,7 @@ class Chronicler
 
       name ||= begin
         no_repository_available! if repositories.empty?
-        postfix = " (on #{current})" if repositories.include?(current)
+        postfix = " (on #{current})" if Chronicler.repositories.include?(current)
         repositories[Ask.list("Which repository do you want to use?#{postfix}", repositories)]
       end
 
